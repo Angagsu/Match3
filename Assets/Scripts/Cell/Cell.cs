@@ -26,8 +26,6 @@ public class Cell : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         this.cellData = cellData;
         image.sprite = sprite;
         this.cellMover = cellMover;
-        UpdateName();
-        ResetPosition();
     }
 
     public bool UpdateCell()
@@ -69,5 +67,12 @@ public class Cell : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void ResetPosition()
     {
         position = BoardService.GetBoardPositionFromPoint(Point);
+    }
+
+    public void SetCellPoint(Point point)
+    {
+        cellData.point = point;
+        UpdateName();
+        ResetPosition();
     }
 }

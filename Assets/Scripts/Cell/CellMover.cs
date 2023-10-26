@@ -30,11 +30,11 @@ public class CellMover
         {
             if (absoluteDirection.x > absoluteDirection.y)
             {
-                addPoint = new Point(mousPosition.x > 0 ? 1 : -1, 0);
+                addPoint = new Point(mouseDirection.x > 0 ? 1 : -1, 0);
             }
             else
             {
-                addPoint = new Point(0, mousPosition.y > 0 ? 1 : -1);
+                addPoint = new Point(0, mouseDirection.y > 0 ? -1 : 1);
             }
         }
 
@@ -44,7 +44,7 @@ public class CellMover
 
         if (!newPoint.Equals(movingCell.Point))
         {
-            position += Point.Multiply(addPoint, Config.PieceSize / 2).ToVector();           
+            position += Point.Multiply(new Point(addPoint.x, -addPoint.y), Config.PieceSize / 2).ToVector();           
         }
         movingCell.MoveToPosition(position);
     }
@@ -65,7 +65,16 @@ public class CellMover
         {
             return;
         }
-        boardService.ResetCell(movingCell);
+
+        if (newPoint.Equals(movingCell.Point))
+        {
+            boardService.ResetCell(movingCell);
+        }
+        else
+        {
+            boardService.FlipCells(movingCell.Point, newPoint, true);
+        }
+
         movingCell = null;
     }
 }
