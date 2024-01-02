@@ -7,6 +7,8 @@ public class CellMover
     private Point newPoint;
     private Vector2 mouseStartPosition;
     private BoardService boardService;
+    public bool IsGamePaused { get; set; } = false;
+
 
     public CellMover(BoardService boardService)
     {
@@ -14,7 +16,7 @@ public class CellMover
     }
     public void Update()
     {
-        if (movingCell == null)
+        if (movingCell == null  || IsGamePaused)
         {
             return;
         }
@@ -39,7 +41,7 @@ public class CellMover
         }
 
         newPoint.Add(addPoint);
-
+        
         var position = BoardService.GetBoardPositionFromPoint(movingCell.Point);
 
         if (!newPoint.Equals(movingCell.Point))

@@ -51,7 +51,10 @@ public class Cell : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        cellMover.MoveCell(this);
+        if (!cellMover.IsGamePaused)
+        {
+            cellMover.MoveCell(this);
+        }  
     }
 
     public void OnPointerUp(PointerEventData eventData)
