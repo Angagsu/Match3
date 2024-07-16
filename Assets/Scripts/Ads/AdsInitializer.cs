@@ -16,11 +16,11 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     public void InitializeAds()
     {
 #if UNITY_IOS
-            _gameId = _iOSGameId;
+            gameId = iOSGameId;
 #elif UNITY_ANDROID
         gameId = androidGameId;
 #elif UNITY_EDITOR
-            _gameId = _androidGameId; //Only for testing the functionality in the Editor
+            gameId = androidGameId; //Only for testing the functionality in the Editor
 #endif
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
